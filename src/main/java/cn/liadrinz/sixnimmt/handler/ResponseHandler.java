@@ -15,6 +15,10 @@ public class ResponseHandler {
     public void handle(Message message, GameEndpoint endpoint) {
         if (RespMethod.SINGLE == message.getHeader().getRespMethod()) {
             endpoint.getSession().getAsyncRemote().sendText(JSON.toJSONString(message));
+        } else if (RespMethod.BROADCAST == message.getHeader().getRespMethod()) {
+            for (Session session : GameEndpoint.getSessionMap().get(endpoint.getRoomId()).values()) {
+                session.getAsyncRemote().sendText(JSON.toJSONString(message));
+            }
         }
     }
 }
