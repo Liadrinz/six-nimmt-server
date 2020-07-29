@@ -1,6 +1,6 @@
 package cn.liadrinz.sixnimmt.handler;
 
-import cn.liadrinz.sixnimmt.data.Message;
+import cn.liadrinz.sixnimmt.data.protocol.Message;
 import cn.liadrinz.sixnimmt.util.SpringContextUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

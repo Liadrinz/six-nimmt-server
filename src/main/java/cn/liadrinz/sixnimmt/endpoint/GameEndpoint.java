@@ -1,7 +1,7 @@
 package cn.liadrinz.sixnimmt.endpoint;
 
 import cn.liadrinz.sixnimmt.handler.RequestHandler;
-import cn.liadrinz.sixnimmt.data.Message;
+import cn.liadrinz.sixnimmt.data.protocol.Message;
 import cn.liadrinz.sixnimmt.handler.ResponseHandler;
 import com.alibaba.fastjson.JSON;
 import lombok.Getter;
@@ -24,7 +24,7 @@ public class GameEndpoint {
     private static ResponseHandler responseHandler;
 
     @Getter
-    private static Map<Integer, Map<Integer, Session>> sessionMap;
+    private static Map<Integer, Map<Integer, Session>> sessionMap = new HashMap<>();
     @Getter
     private Session session;
     @Getter

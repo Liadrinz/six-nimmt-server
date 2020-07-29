@@ -1,4 +1,4 @@
-package cn.liadrinz.sixnimmt.data;
+package cn.liadrinz.sixnimmt.data.protocol;
 
 import lombok.Data;
 

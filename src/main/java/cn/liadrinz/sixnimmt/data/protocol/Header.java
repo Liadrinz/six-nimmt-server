@@ -1,7 +1,6 @@
-package cn.liadrinz.sixnimmt.data;
+package cn.liadrinz.sixnimmt.data.protocol;
 
 import lombok.Data;
-import cn.liadrinz.sixnimmt.data.EnumTypes.*;
 
 @Data
 public class Header {
