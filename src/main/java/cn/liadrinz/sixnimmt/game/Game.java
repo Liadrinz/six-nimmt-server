@@ -4,25 +4,42 @@ import cn.liadrinz.sixnimmt.data.entity.User;
 import cn.liadrinz.sixnimmt.data.protocol.Card;
 import cn.liadrinz.sixnimmt.data.protocol.CardState;
 import cn.liadrinz.sixnimmt.util.CardUtil;
+import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Game implements GameAction, GameInfo {
+    @Getter
     private final List<User> players;
+    @Getter
     private final List<Card> cardPool;
+
+    @Getter
+    private final Map<Long, List<Card>> userCardsMap = new HashMap<>(maxPlayers);
+    @Getter
+    private final Map<CardState, List<Card>> stateCardsMap = new HashMap<>(CardState.values().length);
+    @Getter
+    private final Map<Integer, Card> numberCardMap = new HashMap<>(Card.MAX);
 
     public Game(List<User> players) {
         assert players.size() <= maxPlayers;
-        this.cardPool = CardUtil.getNewCards();
         this.players = players;
+        for (User player : players) {
+            userCardsMap.put(player.getId(), new ArrayList<>());
+        }
+        for (CardState state : CardState.values()) {
+            stateCardsMap.put(state, new ArrayList<>());
+        }
+        for (int i = 1; i < Card.MAX; ++i) {
+            numberCardMap.put(i, null);
+        }
+        this.cardPool = CardUtil.getNewCards(this);
     }
 
-    private List<List<Card>> cardMatrix = new ArrayList<>();
-    private Queue<Card> gamingBuffer = new ConcurrentLinkedQueue<>();
+    @Getter
+    private final List<List<Card>> cardMatrix = new ArrayList<>();
+    private final Queue<Card> gamingBuffer = new ConcurrentLinkedQueue<>();
 
     @Override
     public void dispatchCard() {
@@ -70,5 +87,20 @@ public class Game implements GameAction, GameInfo {
     @Override
     public List<Card> getCards(Integer userId, CardState cardState) {
         return null;
+    }
+
+    @Override
+    public void startGame() {
+
+    }
+
+    @Override
+    public void finishGame() {
+
+    }
+
+    @Override
+    public boolean isStarted() {
+        return false;
     }
 }

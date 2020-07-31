@@ -4,6 +4,16 @@ import cn.liadrinz.sixnimmt.data.protocol.Card;
 
 public interface GameAction {
     /**
+     * 开始游戏
+     */
+    void startGame();
+
+    /**
+     * 结束游戏
+     */
+    void finishGame();
+
+    /**
      * 发牌
      */
     void dispatchCard();

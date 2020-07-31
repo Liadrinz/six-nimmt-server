@@ -8,10 +8,17 @@ import java.util.List;
 public interface GameInfo {
     int maxPlayers = 10;
     int cardsEachPlayer = 10;
+
     /**
-     * 获取用户牛头数量
+     *
+     * @return 游戏是否开始
+     */
+    boolean isStarted();
+
+    /**
+     * 获取用户本局牛头数量
      * @param userId 用户id
-     * @return 用户牛头数量
+     * @return 用户本局牛头数量
      */
     int getCows(int userId);
 
@@ -22,4 +29,10 @@ public interface GameInfo {
      * @return 符合要求的所有卡牌
      */
     List<Card> getCards(Integer userId, CardState cardState);
+
+    /**
+     * 获取场面情况
+     * @return 场面情况
+     */
+    List<List<Card>> getCardMatrix();
 }
