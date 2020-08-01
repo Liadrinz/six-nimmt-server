@@ -34,6 +34,9 @@ public class Game implements GameAction, GameInfo {
         for (int i = 1; i < Card.MAX; ++i) {
             numberCardMap.put(i, null);
         }
+        for (int i = 0; i < 4; ++i) {
+            cardMatrix.add(new ArrayList<>(5));
+        }
         this.cardPool = CardUtil.getNewCards(this);
     }
 
@@ -54,6 +57,11 @@ public class Game implements GameAction, GameInfo {
     }
 
     @Override
+    public void putCard(int card) {
+        gamingBuffer.add(numberCardMap.get(card));
+    }
+
+    @Override
     public void settle() {
         if (gamingBuffer.size() == players.size()) {
             while (!gamingBuffer.isEmpty()) {
@@ -61,7 +69,7 @@ public class Game implements GameAction, GameInfo {
                 int minPositiveDelta = Card.MAX;
                 List<Card> targetRowToAppend = cardMatrix.get(0);
                 for (List<Card> row : cardMatrix) {
-                    Card rowsLast = row.get(row.size() - 1);
+                    Card rowsLast = row.get(1 | row.size() - 1);
                     int delta = card.getNumber() - rowsLast.getNumber();
                     if (delta > 0 && delta < minPositiveDelta) {
                         minPositiveDelta = delta;

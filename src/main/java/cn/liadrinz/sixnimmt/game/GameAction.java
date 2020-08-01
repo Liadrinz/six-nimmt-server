@@ -20,6 +20,12 @@ public interface GameAction {
 
     /**
      * 出一张牌
+     * @param card 卡牌数字
+     */
+    void putCard(int card);
+
+    /**
+     * 出一张牌
      * @param card 卡牌
      */
     void putCard(Card card);
